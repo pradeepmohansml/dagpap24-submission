@@ -1,0 +1,9 @@
+setfit
+transformers
+scikit-llm
+scikit-learn
+google-cloud-aiplatform
+openai
+dspy-ai
+datasets
+accelerate
