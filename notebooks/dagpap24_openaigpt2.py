@@ -296,6 +296,7 @@ def main():
         "preprocessing_num_workers": params["bert"]["preprocessing_num_workers"],
         "eval_accumulation_steps": params["bert"]["eval_accumulation_steps"],
         "log_level": params["bert"]["log_level"],
+        "use_cpu": params["bert"]["use_cpu"],
     }
 
     # save hf_token_classification.py config file
@@ -311,7 +312,7 @@ def main():
     )
     path_to_test_preds = str(
         project_root
-        / f'{params["data"]["path_to_data"]}/{params["bert"]["output_dir"]}/test_predictions.json'
+        / f'{params["data"]["path_to_data"]}/{params["bert"]["output_dir"]}/test_predictions_openaigpt2.json'
     )
     path_to_final_output = str(
         project_root
