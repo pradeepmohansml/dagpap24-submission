@@ -18,14 +18,20 @@ from fileconfig import (
     BASELINE_CONFIG_FILE_NAME,
     DISTILBERT_CONFIG_FILE_NAME,
     ROBERTA_CONFIG_FILE_NAME,
-    MEGATRON_CONFIG_FILE_NAME,
     T5_CONFIG_FILE_NAME,
     PHI_CONFIG_FILE_NAME,
     OPENAI_CONFIG_FILE_NAME,
-    FALCON_CONFIG_FILE_NAME
+    FALCON_CONFIG_FILE_NAME,
+    BASELINE_CONFIG_JSON,
+    DISTILBERT_CONFIG_JSON,
+    ROBERTA_CONFIG_JSON,
+    T5_CONFIG_JSON,
+    PHI_CONFIG_JSON,
+    OPENAI_CONFIG_JSON,
+    FALCON_CONFIG_JSON,
 )
 
-from hf_token_classification_roberta import main as hf_token_classification
+from hf_token_classification_openaigpt2 import main as hf_token_classification
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(
@@ -33,7 +39,7 @@ logging.basicConfig(
 )
 
 """
-This script performs span prediction and classification with bert models.
+This script performs span prediction and classification with openai-gpt2 models.
 """
 
 
@@ -247,9 +253,8 @@ def main():
         raise logger.error(f"Error initializing argument parser")
     """
     # loading config params
-    with open(str(project_root / "config" / ROBERTA_CONFIG_FILE_NAME)) as f:
+    with open(str(project_root / "config" / OPENAI_CONFIG_FILE_NAME)) as f:
         params = yaml.load(f, Loader=yaml.FullLoader)
-
 
     path_to_data_folder = str(project_root / params["data"]["path_to_data"])
 
@@ -294,7 +299,7 @@ def main():
     }
 
     # save hf_token_classification.py config file
-    hf_config_file_path = str(project_root / "config/config_huggingface_roberta.json")
+    hf_config_file_path = str(project_root / "config" / OPENAI_CONFIG_JSON)
     with open(hf_config_file_path, "w") as f:
         json.dump(config_dict, f, indent=4)
 
@@ -306,7 +311,7 @@ def main():
     )
     path_to_test_preds = str(
         project_root
-        / f'{params["data"]["path_to_data"]}/{params["bert"]["output_dir"]}/test_predictions_roberta.json'
+        / f'{params["data"]["path_to_data"]}/{params["bert"]["output_dir"]}/test_predictions.json'
     )
     path_to_final_output = str(
         project_root
@@ -318,7 +323,8 @@ def main():
         path_to_test_preds=path_to_test_preds,
         path_to_final_output=path_to_final_output,
     )
-    
+
+
 if __name__ == "__main__":
     main()
     
