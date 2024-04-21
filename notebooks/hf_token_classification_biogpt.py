@@ -72,7 +72,7 @@ class ModelArguments:
         },
     )
     tokenizer_name: Optional[str] = field(
-        default="FacebookAI/roberta-base",
+        default=None,
         metadata={
             "help": "Pretrained tokenizer name or path \
                      if not the same as model_name"
@@ -399,26 +399,26 @@ def main(json_config_file_path: str = ""):
         revision=model_args.model_revision,
         use_auth_token=True if model_args.use_auth_token else None,
     )
-    # tokenizer = AutoTokenizer.from_pretrained(
-    #     model_args.tokenizer_name
-    #     if model_args.tokenizer_name
-    #     else model_args.model_name_or_path,
-    #     cache_dir=model_args.cache_dir,
-    #     use_fast=True,
-    #     revision=model_args.model_revision,
-    #     use_auth_token=True if model_args.use_auth_token else None,
-    # )
+    tokenizer = AutoTokenizer.from_pretrained(
+         model_args.tokenizer_name
+         if model_args.tokenizer_name
+         else model_args.model_name_or_path,
+         cache_dir=model_args.cache_dir,
+         use_fast=True,
+         revision=model_args.model_revision,
+         use_auth_token=True if model_args.use_auth_token else None,
+     )
 
-    tokenizer = RobertaTokenizerFast.from_pretrained(
-        model_args.tokenizer_name
-        if model_args.tokenizer_name
-        else model_args.model_name_or_path,
-        cache_dir=model_args.cache_dir,
-        use_fast=True,
-        revision=model_args.model_revision,
-        use_auth_token=True if model_args.use_auth_token else None,
-        add_prefix_space=True,
-    )
+    #tokenizer = RobertaTokenizerFast.from_pretrained(
+    #    model_args.tokenizer_name
+    #    if model_args.tokenizer_name
+    #    else model_args.model_name_or_path,
+    #    cache_dir=model_args.cache_dir,
+    #    use_fast=True,
+    #     revision=model_args.model_revision,
+    #    use_auth_token=True if model_args.use_auth_token else None,
+    #    add_prefix_space=True,
+    #)
     tokenizer.pad_token = tokenizer.eos_token
 
     model = AutoModelForTokenClassification.from_pretrained(
@@ -641,11 +641,11 @@ def main(json_config_file_path: str = ""):
 
         # Save predictions
         output_test_predictions_file = os.path.join(
-            training_args.output_dir, "test_predictions_roberta.txt"
+            training_args.output_dir, "test_predictions_biogpt.txt"
         )
 
         output_json_predictions_file = os.path.join(
-            training_args.output_dir, "test_predictions_roberta.json"
+            training_args.output_dir, "test_predictions_biogpt.json"
         )
 
         if trainer.is_world_process_zero():
