@@ -39,7 +39,7 @@ from transformers import (
     PreTrainedTokenizerFast,
     Trainer,
     TrainingArguments,
-    set_seed, CodeGenTokenizerFast, RobertaTokenizerFast,
+    set_seed, CodeGenTokenizerFast, T5TokenizerFast,
 )
 from transformers.trainer_utils import get_last_checkpoint, is_main_process
 from transformers.utils import check_min_version
@@ -72,7 +72,7 @@ class ModelArguments:
         },
     )
     tokenizer_name: Optional[str] = field(
-        default="FacebookAI/roberta-base",
+        default="google-t5/t5-base",
         metadata={
             "help": "Pretrained tokenizer name or path \
                      if not the same as model_name"
@@ -409,7 +409,7 @@ def main(json_config_file_path: str = ""):
     #     use_auth_token=True if model_args.use_auth_token else None,
     # )
 
-    tokenizer = RobertaTokenizerFast.from_pretrained(
+    tokenizer = T5TokenizerFast.from_pretrained(
         model_args.tokenizer_name
         if model_args.tokenizer_name
         else model_args.model_name_or_path,
@@ -641,11 +641,11 @@ def main(json_config_file_path: str = ""):
 
         # Save predictions
         output_test_predictions_file = os.path.join(
-            training_args.output_dir, "test_predictions_roberta.txt"
+            training_args.output_dir, "test_predictions_t5.txt"
         )
 
         output_json_predictions_file = os.path.join(
-            training_args.output_dir, "test_predictions_roberta.json"
+            training_args.output_dir, "test_predictions_t5.json"
         )
 
         if trainer.is_world_process_zero():

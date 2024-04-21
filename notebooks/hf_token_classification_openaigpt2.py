@@ -39,7 +39,7 @@ from transformers import (
     PreTrainedTokenizerFast,
     Trainer,
     TrainingArguments,
-    set_seed,
+    set_seed,GPT2TokenizerFast
 )
 from transformers.trainer_utils import get_last_checkpoint, is_main_process
 from transformers.utils import check_min_version
@@ -399,7 +399,7 @@ def main(json_config_file_path: str = ""):
         revision=model_args.model_revision,
         use_auth_token=True if model_args.use_auth_token else None,
     )
-    tokenizer = AutoTokenizer.from_pretrained(
+    tokenizer = GPT2TokenizerFast.from_pretrained(
         model_args.tokenizer_name
         if model_args.tokenizer_name
         else model_args.model_name_or_path,
@@ -407,7 +407,9 @@ def main(json_config_file_path: str = ""):
         use_fast=True,
         revision=model_args.model_revision,
         use_auth_token=True if model_args.use_auth_token else None,
+        add_prefix_space=True,
     )
+    tokenizer.pad_token = tokenizer.eos_token
 
     model = AutoModelForTokenClassification.from_pretrained(
         model_args.model_name_or_path,
