@@ -18,14 +18,14 @@ from fileconfig import (
     BASELINE_CONFIG_FILE_NAME,
     DISTILBERT_CONFIG_FILE_NAME,
     ROBERTA_CONFIG_FILE_NAME,
-    MEGATRON_CONFIG_FILE_NAME,
+    BIOGPT_CONFIG_FILE_NAME,
     T5_CONFIG_FILE_NAME,
     PHI_CONFIG_FILE_NAME,
     OPENAI_CONFIG_FILE_NAME,
     FALCON_CONFIG_FILE_NAME
 )
 
-from hf_token_classification_roberta import main as hf_token_classification
+from hf_token_classification_biogpt import main as hf_token_classification
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(
@@ -247,7 +247,7 @@ def main():
         raise logger.error(f"Error initializing argument parser")
     """
     # loading config params
-    with open(str(project_root / "config" / ROBERTA_CONFIG_FILE_NAME)) as f:
+    with open(str(project_root / "config" / BIOGPT_CONFIG_FILE_NAME)) as f:
         params = yaml.load(f, Loader=yaml.FullLoader)
 
 
@@ -294,7 +294,7 @@ def main():
     }
 
     # save hf_token_classification.py config file
-    hf_config_file_path = str(project_root / "config/config_huggingface_roberta.json")
+    hf_config_file_path = str(project_root / "config/config_huggingface_biogpt.json")
     with open(hf_config_file_path, "w") as f:
         json.dump(config_dict, f, indent=4)
 
@@ -306,7 +306,7 @@ def main():
     )
     path_to_test_preds = str(
         project_root
-        / f'{params["data"]["path_to_data"]}/{params["bert"]["output_dir"]}/test_predictions_roberta.json'
+        / f'{params["data"]["path_to_data"]}/{params["bert"]["output_dir"]}/test_predictions_biogpt.json'
     )
     path_to_final_output = str(
         project_root
