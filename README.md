@@ -5,7 +5,7 @@
 Model | Model Class | Score
 :--- | :---: | ---:
 Roberta Base | BERT - MLM | 0.88
-T5 - Base    | Transforemr - Seq2Seq | *
+T5 - Base    | Transformer - Seq2Seq | *
 OpenAIGPT2   | GPT - Next Word Prediction| *
 SciBERT - Baseline | BERT - MLM | 0.87
 DistilBERT - Baseline | BERT - MLM | *
