@@ -9,3 +9,4 @@ T5 - Base    | Transformer - Seq2Seq | *
 OpenAIGPT2   | GPT - Next Word Prediction| *
 SciBERT - Baseline | BERT - MLM | 0.87
 DistilBERT - Baseline | BERT - MLM | *
+### Approach: Finetuned Token Classification
