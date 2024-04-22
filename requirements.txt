@@ -27,3 +27,4 @@ boto3
 mkl
 gdown
 sacremoses
+sentencepiece

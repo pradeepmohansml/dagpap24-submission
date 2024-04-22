@@ -39,7 +39,7 @@ from transformers import (
     PreTrainedTokenizerFast,
     Trainer,
     TrainingArguments,
-    set_seed, CodeGenTokenizerFast, T5TokenizerFast,
+    set_seed, CodeGenTokenizerFast, T5TokenizerFast, T5ForTokenClassification,
 )
 from transformers.trainer_utils import get_last_checkpoint, is_main_process
 from transformers.utils import check_min_version
@@ -421,7 +421,7 @@ def main(json_config_file_path: str = ""):
     )
     tokenizer.pad_token = tokenizer.eos_token
 
-    model = AutoModelForTokenClassification.from_pretrained(
+    model = T5ForTokenClassification.from_pretrained(
         model_args.model_name_or_path,
         from_tf=bool(".ckpt" in model_args.model_name_or_path),
         config=config,
@@ -429,6 +429,17 @@ def main(json_config_file_path: str = ""):
         revision=model_args.model_revision,
         use_auth_token=True if model_args.use_auth_token else None,
     )
+    
+    #model = AutoModelForTokenClassification.from_pretrained(
+    #    model_args.model_name_or_path,
+    #    from_tf=bool(".ckpt" in model_args.model_name_or_path),
+    #    config=config,
+    #    cache_dir=model_args.cache_dir,
+    #    revision=model_args.model_revision,
+    #    use_auth_token=True if model_args.use_auth_token else None,
+    #)
+    model.model_parallel = False
+
 
     # Tokenizer check: this script requires a fast tokenizer.
     if not isinstance(tokenizer, PreTrainedTokenizerFast):

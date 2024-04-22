@@ -18,7 +18,6 @@ from fileconfig import (
     BASELINE_CONFIG_FILE_NAME,
     DISTILBERT_CONFIG_FILE_NAME,
     ROBERTA_CONFIG_FILE_NAME,
-    MEGATRON_CONFIG_FILE_NAME,
     T5_CONFIG_FILE_NAME,
     PHI_CONFIG_FILE_NAME,
     OPENAI_CONFIG_FILE_NAME,
@@ -189,6 +188,42 @@ def convert_parquet_data_to_json(
     )
 
 
+    
+def predictions_sanity_check():
+    # loading config params
+    project_root: Path = get_project_root()
+    with open(str(project_root / "config" / ROBERTA_CONFIG_FILE_NAME)) as f:
+        params = yaml.load(f, Loader=yaml.FullLoader)
+
+
+    path_to_data_folder = str(project_root / params["data"]["path_to_data"])
+
+    input_train_file_name = params["data"]["train_file"]
+    input_test_file_name = params["data"]["test_file"]
+    output_train_file_name = params["data"]["train_file_name"]
+    output_val_file_name = params["data"]["validation_file_name"]
+    output_test_file_name = params["data"]["test_file_name"]
+    
+    path_to_test_data = str(
+        project_root
+        / f'{params["data"]["path_to_data"]}/{input_test_file_name}'
+    )
+    path_to_test_preds = str(
+        project_root
+        / f'{params["data"]["path_to_data"]}/{params["bert"]["output_dir"]}/test_predictions_roberta.json'
+    )
+    path_to_final_output = str(
+        project_root
+        / f'{params["data"]["path_to_data"]}/{params["data"]["pred_file_name"]}'
+    )
+
+    convert_preds_to_original_format(
+        path_to_test_data=path_to_test_data,
+        path_to_test_preds=path_to_test_preds,
+        path_to_final_output=path_to_final_output,
+    )
+
+
 def convert_preds_to_original_format(
     path_to_test_data: str = "",
     path_to_test_preds: str = "",
@@ -197,23 +232,41 @@ def convert_preds_to_original_format(
     """
     This function takes the chunked preds and groups them into the original format
     """
-
+    logger.info(f"Original Test Data Path: {path_to_test_data}")
+    logger.info(f"Test Set Predictions path:{path_to_test_preds}")
+    logger.info(f"Final Output Path:{path_to_final_output}")
     orig_test_data = pd.read_parquet(path_to_test_data, engine="fastparquet")
     if orig_test_data.index.name != "index":
         orig_test_data.set_index("index", inplace=True)
-
+    logger.info(f"Original Test Data Loaded, {orig_test_data.shape}")
+    
     with open(path_to_test_preds, "r") as f:
         test_preds = json.load(f)
 
     test_preds_df = pd.DataFrame(test_preds).groupby(by="index").agg(list)
 
+    logger.info(f"Original Test DF = {orig_test_data.columns}, \
+                  Index Range = {max(orig_test_data.index.tolist())}, {min(orig_test_data.index.tolist())},\
+                  Original Test DF Shape = {orig_test_data.shape}")
+    logger.info(f"Predicted DF before apply = {test_preds_df.columns}")
     test_preds_df["preds"] = test_preds_df["predictions"].apply(
         lambda x: sum(x, [])
     )
+    
+    logger.info(f"Predicted DF after apply Info")
+    logger.info(f"Predictions after DF = {test_preds_df.columns}, \
+                  Index Range = {max(test_preds_df.index.tolist())}, {min(test_preds_df.index.tolist())},\
+                  Original Test DF Shape = {test_preds_df.shape}")
+
 
     for index, row in test_preds_df.iterrows():
+        #logger.info(f"Checking Index = {index}")
+        #logger.info(f"Original Length = {len(orig_test_data.loc[index, 'tokens'])}")
+        #logger.info(f"Predicted Length = {len(row['preds'])}")
+        #logger.info(f"Original Values = {orig_test_data.loc[index, 'tokens']}")
+        #logger.info(f"Predicted Values = {test_preds_df.at[index, 'preds']}")
         if len(row["preds"]) > len(orig_test_data.loc[index, "tokens"]):
-            test_preds_df.loc[index, "preds"] = row["preds"][
+            test_preds_df.at[index, "preds"] = row["preds"][
                 : len(orig_test_data.loc[index, "tokens"])
             ]
 
@@ -222,6 +275,7 @@ def convert_preds_to_original_format(
                 len(orig_test_data.loc[index, "tokens"]) - len(row["preds"])
             )
     for index, row in test_preds_df.iterrows():
+        #logger.info(f"Checking Index = {index}")
         assert len(row["preds"]) == len(orig_test_data.loc[index, "tokens"])
 
     pd.DataFrame(test_preds_df["preds"]).to_parquet(path_to_final_output)
