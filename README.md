@@ -1,7 +1,7 @@
 # DAGPAP 2024 Submission
 ## Detecting automatically generated scientific papers (ACL 2024)
 ### [Competition Website](https://www.codabench.org/competitions/2431/)
-### Results
+### Results - Training + Dev Set (competition scorer)
 Model | Model Class | Score
 :--- | :---: | ---:
 Roberta Base | BERT - MLM | 0.88
