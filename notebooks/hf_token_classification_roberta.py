@@ -666,6 +666,11 @@ def main(json_config_file_path: str = ""):
                 )
             with open(output_json_predictions_file, "w") as f:
                 f.write(json.dumps(data_list))
+    #Perform Final Checkpoint of the model
+    trainer.log_metrics("train", metrics)
+    trainer.save_metrics("train", metrics)
+    trainer.save_state()
+    trainer.save_model()  # Saves the tokenizer too for easy upload
 
 
 def _mp_fn(index):

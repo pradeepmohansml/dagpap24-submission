@@ -682,6 +682,7 @@ def main(json_config_file_path: str = ""):
     trainer.log_metrics("train", metrics)
     trainer.save_metrics("train", metrics)
     trainer.save_state()
+    trainer.save_model()  # Saves the tokenizer too for easy upload
 
 
 def _mp_fn(index):
