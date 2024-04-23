@@ -271,9 +271,8 @@ def convert_preds_to_original_format(
             ]
 
         elif len(row["preds"]) < len(orig_test_data.loc[index, "tokens"]):
-            test_preds_df.loc[index, "preds"] = row["preds"] + 0 * (
-                len(orig_test_data.loc[index, "tokens"]) - len(row["preds"])
-            )
+            test_preds_df.at[index, "preds"] = row["preds"] + [0 for _ in range(
+                len(orig_test_data.loc[index, "tokens"]) - len(row["preds"]))] 
     for index, row in test_preds_df.iterrows():
         #logger.info(f"Checking Index = {index}")
         assert len(row["preds"]) == len(orig_test_data.loc[index, "tokens"])
