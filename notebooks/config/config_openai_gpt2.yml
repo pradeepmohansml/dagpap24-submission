@@ -19,12 +19,12 @@ bert: # bert model params
   per_device_eval_batch_size: 16
   save_steps: 5000
   output_dir: output_dev_openaigpt2
-  overwrite_output_dir: True
+  overwrite_output_dir: False
   report_to: none
   do_train: True
   do_eval: True
   do_predict: True
-  preprocessing_num_workers: 16
+  preprocessing_num_workers: 32
   eval_accumulation_steps: 5
   log_level: error
   use_cpu: False
