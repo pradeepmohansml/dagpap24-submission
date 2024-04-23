@@ -197,7 +197,7 @@ def convert_parquet_data_to_json(
 def predictions_sanity_check():
     # loading config params
     project_root: Path = get_project_root()
-    with open(str(project_root / "config" / T5_CONFIG_FILE_NAME)) as f:
+    with open(str(project_root / "config" / OPENAI_CONFIG_FILE_NAME)) as f:
         params = yaml.load(f, Loader=yaml.FullLoader)
 
 
