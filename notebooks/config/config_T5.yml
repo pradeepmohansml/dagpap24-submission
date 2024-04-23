@@ -19,7 +19,7 @@ bert: # bert model params
   per_device_eval_batch_size: 16
   save_steps: 5000
   output_dir: output_dev_t5
-  overwrite_output_dir: True
+  overwrite_output_dir: False
   report_to: none
   do_train: True
   do_eval: True
