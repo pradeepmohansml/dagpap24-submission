@@ -1,0 +1,20 @@
+{
+    "train_file": "/home/ec2-user/SageMaker/dagpap24-submission/notebooks/data/data_gen_content_train_biomed_roberta.json",
+    "validation_file": "/home/ec2-user/SageMaker/dagpap24-submission/notebooks/data/data_gen_content_val_biomed_roberta.json",
+    "test_file": "/home/ec2-user/SageMaker/dagpap24-submission/notebooks/data/data_gen_content_dev_biomed_roberta.json",
+    "output_dir": "/home/ec2-user/SageMaker/dagpap24-submission/notebooks/data/output_dev_biomed_roberta",
+    "model_name_or_path": "allenai/biomed_roberta_base",
+    "num_train_epochs": 10,
+    "per_device_train_batch_size": 8,
+    "per_device_eval_batch_size": 8,
+    "save_steps": 5000,
+    "overwrite_output_dir": false,
+    "seed": 0,
+    "do_train": true,
+    "report_to": "none",
+    "do_eval": true,
+    "do_predict": true,
+    "preprocessing_num_workers": 16,
+    "eval_accumulation_steps": 5,
+    "log_level": "error"
+}
