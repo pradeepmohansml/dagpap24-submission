@@ -28,3 +28,4 @@ mkl
 gdown
 sacremoses
 sentencepiece
+protobuf
