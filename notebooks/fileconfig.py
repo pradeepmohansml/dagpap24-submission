@@ -1,5 +1,4 @@
 BASELINE="scibert"
-BASELINE_CONFIG_FILE_NAME="config_baseline.yml"
 DISTILBERT_CONFIG_FILE_NAME="config_distilbert.yml"
 ROBERTA_CONFIG_FILE_NAME="config_roberta.yml"
 BIOMED_ROBERTA_CONFIG_FILE_NAME="config_biomed_roberta.yml"
@@ -8,7 +7,6 @@ OPENAI_CONFIG_FILE_NAME="config_openai_gpt2.yml"
 DEBERTA_CONFIG_FILE_NAME="config_deberta.yml"
 SCIBERT_CONFIG_FILE_NAME = "config_scibert.yml"
 
-BASELINE_CONFIG_JSON="config_baseline.json"
 SCIBERT_CONFIG_JSON = "config_scibert.json"
 DISTILBERT_CONFIG_JSON="config_distilbert.json"
 ROBERTA_CONFIG_JSON="config_roberta.json"
