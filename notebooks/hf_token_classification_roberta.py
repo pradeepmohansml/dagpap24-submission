@@ -72,7 +72,7 @@ class ModelArguments:
         },
     )
     tokenizer_name: Optional[str] = field(
-        default="FacebookAI/roberta-base",
+        default=None,
         metadata={
             "help": "Pretrained tokenizer name or path \
                      if not the same as model_name"
@@ -666,6 +666,7 @@ def main(json_config_file_path: str = ""):
                 )
             with open(output_json_predictions_file, "w") as f:
                 f.write(json.dumps(data_list))
+    
     #Perform Final Checkpoint of the model
     trainer.log_metrics("train", metrics)
     trainer.save_metrics("train", metrics)

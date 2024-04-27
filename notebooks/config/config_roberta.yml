@@ -27,3 +27,4 @@ bert: # bert model params
   preprocessing_num_workers: 16
   eval_accumulation_steps: 5
   log_level: error
+  use_cpu: False
