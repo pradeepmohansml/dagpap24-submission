@@ -207,14 +207,13 @@ def convert_preds_to_original_format(
 
     for index, row in test_preds_df.iterrows():
         if len(row["preds"]) > len(orig_test_data.loc[index, "tokens"]):
-            test_preds_df.loc[index, "preds"] = row["preds"][
+            test_preds_df.at[index, "preds"] = row["preds"][
                 : len(orig_test_data.loc[index, "tokens"])
             ]
 
         elif len(row["preds"]) < len(orig_test_data.loc[index, "tokens"]):
-            test_preds_df.loc[index, "preds"] = row["preds"] + [0] * (
-                len(orig_test_data.loc[index, "tokens"]) - len(row["preds"])
-            )
+            test_preds_df.at[index, "preds"] = row["preds"] + [0 for _ in range(
+                len(orig_test_data.loc[index, "tokens"]) - len(row["preds"]))]
     for index, row in test_preds_df.iterrows():
         assert len(row["preds"]) == len(orig_test_data.loc[index, "tokens"])
 
@@ -253,6 +252,7 @@ def main():
     output_val_file_name = params["data"]["validation_file_name"]
     output_test_file_name = params["data"]["test_file_name"]
 
+   
     convert_parquet_data_to_json(
         input_folder_path=path_to_data_folder,
         input_train_file_name=input_train_file_name,
@@ -293,7 +293,8 @@ def main():
         json.dump(config_dict, f, indent=4)
 
     hf_token_classification(json_config_file_path=hf_config_file_path)
-
+    
+    
     path_to_test_data = str(
         project_root
         / f'{params["data"]["path_to_data"]}/{input_test_file_name}'
