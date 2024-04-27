@@ -15,13 +15,8 @@ from tqdm.auto import tqdm
 
 from utils import get_project_root
 from fileconfig import (
-    BASELINE_CONFIG_FILE_NAME,
-    DISTILBERT_CONFIG_FILE_NAME,
     ROBERTA_CONFIG_FILE_NAME,
-    T5_CONFIG_FILE_NAME,
-    PHI_CONFIG_FILE_NAME,
-    OPENAI_CONFIG_FILE_NAME,
-    FALCON_CONFIG_FILE_NAME
+    ROBERTA_CONFIG_JSON,
 )
 
 from hf_token_classification_roberta import main as hf_token_classification
@@ -347,7 +342,7 @@ def main():
     }
 
     # save hf_token_classification.py config file
-    hf_config_file_path = str(project_root / "config/config_huggingface_roberta.json")
+    hf_config_file_path = str(project_root / "config" / ROBERTA_CONFIG_JSON)
     with open(hf_config_file_path, "w") as f:
         json.dump(config_dict, f, indent=4)
 
