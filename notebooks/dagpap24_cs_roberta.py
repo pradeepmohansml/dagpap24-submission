@@ -15,11 +15,11 @@ from tqdm.auto import tqdm
 
 from utils import get_project_root
 from fileconfig import (
-    BIOMED_ROBERTA_CONFIG_FILE_NAME,
-    BIOMED_ROBERTA_CONFIG_JSON
+    CS_ROBERTA_CONFIG_FILE_NAME,
+    CS_ROBERTA_CONFIG_JSON
 )
 
-from hf_token_classification_biomed_roberta import main as hf_token_classification
+from hf_token_classification_cs_roberta import main as hf_token_classification
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(
@@ -205,7 +205,7 @@ def predictions_sanity_check():
     )
     path_to_test_preds = str(
         project_root
-        / f'{params["data"]["path_to_data"]}/{params["bert"]["output_dir"]}/test_predictions_biomed_roberta.json'
+        / f'{params["data"]["path_to_data"]}/{params["bert"]["output_dir"]}/test_predictions_cs_roberta.json'
     )
     path_to_final_output = str(
         project_root
@@ -295,7 +295,7 @@ def main():
         raise logger.error(f"Error initializing argument parser")
     """
     # loading config params
-    with open(str(project_root / "config" / BIOMED_ROBERTA_CONFIG_FILE_NAME)) as f:
+    with open(str(project_root / "config" / CS_ROBERTA_CONFIG_FILE_NAME)) as f:
         params = yaml.load(f, Loader=yaml.FullLoader)
 
 
@@ -342,7 +342,7 @@ def main():
     }
 
     # save hf_token_classification.py config file
-    hf_config_file_path = str(project_root / "config"/BIOMED_ROBERTA_CONFIG_JSON)
+    hf_config_file_path = str(project_root / "config"/CS_ROBERTA_CONFIG_JSON)
     with open(hf_config_file_path, "w") as f:
         json.dump(config_dict, f, indent=4)
 
@@ -354,7 +354,7 @@ def main():
     )
     path_to_test_preds = str(
         project_root
-        / f'{params["data"]["path_to_data"]}/{params["bert"]["output_dir"]}/test_predictions_biomed_roberta.json'
+        / f'{params["data"]["path_to_data"]}/{params["bert"]["output_dir"]}/test_predictions_cs_roberta.json'
     )
     path_to_final_output = str(
         project_root
