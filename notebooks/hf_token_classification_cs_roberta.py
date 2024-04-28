@@ -641,11 +641,11 @@ def main(json_config_file_path: str = ""):
 
         # Save predictions
         output_test_predictions_file = os.path.join(
-            training_args.output_dir, "test_predictions_biomed_roberta.txt"
+            training_args.output_dir, "test_predictions_cs_roberta.txt"
         )
 
         output_json_predictions_file = os.path.join(
-            training_args.output_dir, "test_predictions_biomed_roberta.json"
+            training_args.output_dir, "test_predictions_cs_roberta.json"
         )
 
         if trainer.is_world_process_zero():
