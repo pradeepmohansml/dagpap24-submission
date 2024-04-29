@@ -37,3 +37,4 @@ gdown
 sacremoses
 sentencepiece
 protobuf
+python-dotenv 
