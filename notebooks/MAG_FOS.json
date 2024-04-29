@@ -1,0 +1,118 @@
+{
+    "FOS": [
+        {
+            "field_of_study": "Art",
+            "sub_fields": [
+                "Aesthetics, Art History, Classics, Humanities, Literature, Visual Arts"
+            ]
+        },
+        {
+            "field_of_study": "Biology",
+            "sub_fields": [
+                "Anatomy, Animal Science, Bioinformatics, Botany, Genetics, Immunology, Zoology"
+            ]
+        },
+        {
+            "field_of_study": "Business",
+            "sub_fields": [
+                "Accounting, Actuarial Science, Commerce, Finance, International Trade, Marketing"
+            ]
+        },
+        {
+            "field_of_study": "Chemistry",
+            "sub_fields": [
+                "Biochemistry, Food Science, Mineralogy, Organic Chemistry, Radiochemistry"
+            ]
+        },
+        {
+            "field_of_study": "Computer Science",
+            "sub_fields": [
+                "Algorithm, Artificial Intelligence, Database, Internet Privacy, Parallel Computing"
+            ]
+        },
+        {
+            "field_of_study": "Economics",
+            "sub_fields": [
+                "Accounting, International Trade, Management, Political Economy, Socioeconomics"
+            ]
+        },
+        {
+            "field_of_study": "Engineering",
+            "sub_fields": [
+                "Aeronautics, Control Theory, Nuclear Engineering, Simulation, Systems-Engineering"
+            ]
+        },
+        {
+            "field_of_study": "Environmental Science",
+            "sub_fields": [
+                "Agricultural Science, Agroforestry, Environmental Planning, Environmental Protection"
+            ]
+        },
+        {
+            "field_of_study": "Geography",
+            "sub_fields": [
+                "Archaeology, Cartography, Forestry, Geodesy, Meteorology, Regional Science"
+            ]
+        },
+        {
+            "field_of_study": "Geology",
+            "sub_fields": [
+                "Climatology, Earth Science, Geophysics, Hydrology, Oceanography, Petrology"
+            ]
+        },
+        {
+            "field_of_study": "History",
+            "sub_fields": [
+                "Ancient History, Archaeology, Classics, Economic History, Ethnology, Genealogy"
+            ]
+        },
+        {
+            "field_of_study": "Materials Science",
+            "sub_fields": [
+                "Ceramic Materials, Composite Material, Metallurgy, Nanotechnology, Optoelectronics"
+            ]
+        },
+        {
+            "field_of_study": "Mathematics",
+            "sub_fields": [
+                "Algebra, Combinatorics, Geometry, Mathematical Optimization, Statistics, Topology"
+            ]
+        },
+        {
+            "field_of_study": "Medicine",
+            "sub_fields": [
+                "Audiology, Cancer Research, Nursing, Orthodontics, Pediatrics, Surgery, Virology"
+            ]
+        },
+        {
+            "field_of_study": "Philosophy",
+            "sub_fields": [
+                "Aesthetics, Epistemology, Humanities, Linguistics, Religious Studies, Theology"
+            ]
+        },
+        {
+            "field_of_study": "Physics",
+            "sub_fields": [
+                "Astronomy, Geophysics, Nuclear Physics, Quantum Mechanics, Thermodynamics"
+            ]
+        },
+        {
+            "field_of_study": "Political Science",
+            "sub_fields": [
+                "Law, Public Administration, Public Relations"
+            ]
+        },
+        {
+            "field_of_study": "Psychology",
+            "sub_fields": [
+                "Cognitive Science, Criminology, Neuroscience, Psychiatry, Social Psychology"
+            ]
+        },
+        {
+            "field_of_study": "Sociology",
+            "sub_fields": [
+                "Anthropology, Demography, Ethnology, Gender Studies, Media Studies, Political Economy"
+            ]
+        }
+    ]
+}

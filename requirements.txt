@@ -9,6 +9,14 @@ datasets
 accelerate
 s3fs
 langchain
+langchain_openai
+langchain_community
+langchain_experimental
+langchain-google-vertexai
+langchain-google-genai
+langchain-groq
+langchain-aws
+pillow
 evaluate
 fastparquet
 pandas
