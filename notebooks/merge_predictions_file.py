@@ -55,6 +55,6 @@ if __name__ == "__main__":
     # To merge the test prediction files
     
     contesting_models = ['roberta', 'scibert', 'deberta', 'biomed_roberta', 'cs_roberta']
-    model_list = [:2]
+    model_list = contesting_models[:2]
     print(model_list)
     test_pred_df = merge_test_model_predictions(model_list)
