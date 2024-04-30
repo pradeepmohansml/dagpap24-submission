@@ -4,8 +4,9 @@ import fastparquet
 
 def merge_test_model_predictions(model_list):
     test_df = pd.read_parquet('data/test_data.parquet', engine='fastparquet')
-    test_df = test_df[['text', 'tokens']]
-    
+    if test_df.index.name != "index":
+        test_df.set_index("index", inplace=True)
+
     merged_df = None
     for model in model_list:
         test_preds_df = pd.read_parquet(f'data/test_data_predictions_{model}.parquet',
@@ -19,7 +20,10 @@ def merge_test_model_predictions(model_list):
         print(merged_df.shape)
 
     merged_test_preds = merged_df.merge(test_df, left_index=True, right_index=True, how='inner')
+    print(f"Final Merged File Shape = {merged_test_preds.shape}")
     merged_test_preds.to_parquet('data/merged_test_predictions.parquet')
+    print("NAs in final merged file")
+    print(merged_test_preds.isna())
     
     return merged_test_preds
 
