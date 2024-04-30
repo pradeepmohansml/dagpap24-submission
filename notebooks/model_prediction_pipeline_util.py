@@ -343,6 +343,6 @@ def chunk_tokens_labels(df: pd.DataFrame, max_length: int):
 # Get the predictions on all the shortlisted models on test_data.parquet and save the predictions parquet file
 contesting_models = ['roberta', 'scibert', 'deberta', 'biomed_roberta', 'cs_roberta']
 with tqdm(total=len(contesting_models)) as pbar:
-    for i,model in enumerate(contesting_models[2:]):
-        print(f"Running Model {contesting_models[2+i]}")
+    for i,model in enumerate(contesting_models[3:4]):
+        print(f"Running Model {contesting_models[3+i]}")
         model_pipeline(model, 'test_data')

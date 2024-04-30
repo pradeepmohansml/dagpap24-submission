@@ -23,7 +23,7 @@ def merge_test_model_predictions(model_list):
     print(f"Final Merged File Shape = {merged_test_preds.shape}")
     merged_test_preds.to_parquet('data/merged_test_predictions.parquet')
     print("NAs in final merged file")
-    print(merged_test_preds.isna())
+    print(merged_test_preds.isna().sum())
     
     return merged_test_preds
 
