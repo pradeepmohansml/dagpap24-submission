@@ -1,7 +1,7 @@
 data:
   path_to_data: data
   train_file: train_data.parquet # this is for the train_test_split.py and eval_f1.py output
-  test_file: train_data.parquet # this is for the train_test_split.py and eval_f1.py output
+  test_file: test_data.parquet # this is for the train_test_split.py and eval_f1.py output
   train_file_name: data_gen_content_train_cs_roberta.json # this is the train file to be used by hf_token_classification.py
   validation_file_name: data_gen_content_val_cs_roberta.json # this is the validation file to be used by hf_token_classification.py
   test_file_name: data_gen_content_dev_cs_roberta.json # this is the test file to be used by hf_token_classification.py
