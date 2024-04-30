@@ -146,11 +146,10 @@ print(os.environ['LLM_MAX_LENGTH'])
 s3 = s3fs.S3FileSystem()
 contesting_models = ['roberta', 'scibert', 'deberta', 'biomed_roberta', 'cs_roberta']
 path='data/merged_test_predictions.parquet'
-#path = 'data/test_data.parquet'
-combined_test_df = merged_model_predictions(path)
+path = 'data/test_data.parquet'
 print(combined_test_df.columns)
 print(combined_test_df.describe())
-
+combined_test_df = merged_model_predictions(path)
 #Load MAG-FOS Taxonomy JSON for different fields of study"
 with open('MAG_FOS.json',"r+") as f:
     mag_fos_taxonomy = json.load(f)
