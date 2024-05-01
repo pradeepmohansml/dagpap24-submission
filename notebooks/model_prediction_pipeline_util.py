@@ -30,7 +30,7 @@ def get_config_params(model_name, filename):
               'json_test_filepath': f'data/data_gen_content_{filename}_{model_name}.json',
               'intermediate_extension': 'json', 'label_column_name': 'ner_tags',
               'label_list': ['0', '1', '2', '3'], 'label_to_id': {'0': 0, '1': 1, '2': 2, '3': 3},
-              'padding': "max_length", 'batched': True, 'num_proc': 32,
+              'padding': "max_length", 'batched': True, 'num_proc': 40,
               'metric': evaluate.load("f1"), 'return_entity_level_metrics': False,
               'output_json_predictions_file': f"data/{filename}_finetuned_predictions_{model_name}.json",
               'output_parquet_predictions_file': f"data/{filename}_predictions_{model_name}.parquet",
@@ -343,6 +343,6 @@ def chunk_tokens_labels(df: pd.DataFrame, max_length: int):
 # Get the predictions on all the shortlisted models on test_data.parquet and save the predictions parquet file
 contesting_models = ['roberta', 'scibert', 'deberta', 'biomed_roberta', 'cs_roberta']
 with tqdm(total=len(contesting_models)) as pbar:
-    for i,model in enumerate(contesting_models[3:4]):
-        print(f"Running Model {contesting_models[3+i]}")
+    for i,model in enumerate(contesting_models[4:]):
+        print(f"Running Model {contesting_models[4+i]}")
         model_pipeline(model, 'test_data')

@@ -168,14 +168,14 @@ print(llms[1].request_timeout)
 #Create a ChatPromptTempate for executing 
 system = f'''Given an input text from a scientific article identify relevant information about the text.
             You can make use of the following major fields of study: {major_fields_of_study_str}
-            You can also make use of the following sub areas within each major field of study listed above: {sub_areas_within_major_field_of_study_str}
+            You can also make use of the following sub areas within each major field of study listed above:{sub_areas_within_major_field_of_study_str}
          '''
 prompt = ChatPromptTemplate.from_messages(
     [("system", system), ("human", "{input}"),]
 )
 
 #construct structured LLMs from input LLMs
-structured_llm = llms[1].with_structured_output(article_fos_dict_schema)
+structured_llm = llms[0].with_structured_output(article_fos_dict_schema)
 structured_article_fos_chain = prompt | structured_llm
 print(structured_article_fos_chain)
 chain = structured_article_fos_chain
@@ -188,7 +188,7 @@ batch_sizes = [len(b) for b in batches]
 print(f"Number of Batches = {len(batches)}")
 print(f"Maximum Batch Size = {max(batch_sizes)}, Minimum Batch Size = {min(batch_sizes)}")
 print(f"Running Field of Study Population with GPT")
-last_checkpt=None
+last_checkpt="checkpt_batch_197"
 results_batches, last_checkpt = populate_field_of_study(batches,load_last_checkpt=f"{last_checkpt}.json" if last_checkpt is not None else None)
 print(last_checkpt)
 results_dict = {}
